@@ -6,3 +6,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementClickInterceptedException
 import time
+from constants import *
+
+response = requests.get(ZILLOW_LINK)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+prices = soup.find_all('span', class_='PropertyCardWrapper__StyledPriceLine')
+addresses = soup.find_all('address')
+links = soup.find_all('a', 'StyledPropertyCardDataArea-anchor')
