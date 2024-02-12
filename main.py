@@ -12,7 +12,7 @@ response = requests.get(ZILLOW_LINK)
 soup = BeautifulSoup(response.text, 'html.parser')
 
 prices = [price.text.split('+')[0].split('/')[0] for price in soup.find_all('span', class_='PropertyCardWrapper__StyledPriceLine')]
-addresses = soup.find_all('address')
+addresses = [address.text.strip().replace('| ', '') for address in soup.find_all('address')]
 links = soup.find_all('a', 'StyledPropertyCardDataArea-anchor')
 
-print(prices)
+print(addresses)
